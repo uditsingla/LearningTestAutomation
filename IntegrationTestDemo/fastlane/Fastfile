@@ -25,6 +25,7 @@ platform :ios do
       output_directory: "./fastlane/test_output",
       output_types: "html,junit",
       result_bundle: true,
+      derived_data_path: "./fastlane/derived_data",
       fail_build: false,    # so CI completes even if tests fail
       code_coverage: false
     )
