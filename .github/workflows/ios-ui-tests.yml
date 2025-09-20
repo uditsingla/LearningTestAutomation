@@ -40,6 +40,7 @@ jobs:
          xcrun simctl erase "iPhone 16"
          echo "Booting simulator"
          xcrun simctl boot "iPhone 16"
+         xcrun simctl bootstatus "iPhone 16" -b
          xcrun simctl list devices
 
       - name: Run UI Tests with Fastlane

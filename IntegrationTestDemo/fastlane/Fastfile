@@ -27,7 +27,8 @@ platform :ios do
       result_bundle: true,
       derived_data_path: "./fastlane/derived_data",
       fail_build: false,    # so CI completes even if tests fail
-      code_coverage: false
+      code_coverage: false,
+      timeout: 100
     )
   end
 end
