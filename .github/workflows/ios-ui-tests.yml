@@ -30,7 +30,7 @@ jobs:
           bundle install
 
       - name: Run UI Tests with Fastlane
-        run: bundle exec fastlane ui_tests
+        run: bundle exec fastlane ios ui_tests
 
       - name: Upload Test Report
         uses: actions/upload-artifact@v4
