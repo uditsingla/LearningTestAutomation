@@ -1,0 +1,40 @@
+name: iOS UI Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  ui-tests:
+    runs-on: macos-latest
+
+    defaults:
+      run:
+        working-directory: IntegrationTestDemo  # 👈 Run inside your project folder
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1
+          bundler-cache: true
+
+      - name: Install dependencies
+        run: |
+          gem install bundler -v 2.6.9
+          bundle install
+
+      - name: Run UI Tests with Fastlane
+        run: bundle exec fastlane ui_tests
+
+      - name: Upload Test Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: ui-test-report
+          path: fastlane/test_output # adjust this to your report folder
+

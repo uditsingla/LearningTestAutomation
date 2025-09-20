@@ -19,9 +19,10 @@ platform :ios do
     scan(
       workspace: "IntegrationTestDemo.xcworkspace",
       scheme: "IntegrationTestDemo",                    # Replace with your scheme name
+      devices: ["iPhone 15"],
       clean: true,
       output_directory: "./fastlane/test_output",
-      output_types: "html,junit"
+      output_types: "html,junit",result_bundle: true
     )
   end
 end
