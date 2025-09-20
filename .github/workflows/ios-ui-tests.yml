@@ -34,13 +34,13 @@ jobs:
 
       - name: Prepare Simulator
         run: |
-        echo "Shutting down simulator if it's already running"
-        xcrun simctl shutdown "iPhone 16" || true
-        echo "Erasing simulator to ensure clean state"
-        xcrun simctl erase "iPhone 16"
-        echo "Booting simulator"
-        xcrun simctl boot "iPhone 16"
-        xcrun simctl list devices
+         echo "Shutting down simulator if it's already running"
+         xcrun simctl shutdown "iPhone 16" || true
+         echo "Erasing simulator to ensure clean state"
+         xcrun simctl erase "iPhone 16"
+         echo "Booting simulator"
+         xcrun simctl boot "iPhone 16"
+         xcrun simctl list devices
 
       - name: Run UI Tests with Fastlane
         run: bundle exec fastlane ios ui_tests
