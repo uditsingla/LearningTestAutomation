@@ -50,14 +50,24 @@ class LoginViewController: UIViewController {
                 ])
     }
 
-    @objc private func handleLogin() {
-        let dashboardVC = DashboardViewController()
-        if usernameField.text == "abhi" && passwordField.text == "123456" {
-            lblSuccessMessage.text = "Login successful"
-            //navigationController?.pushViewController(dashboardVC, animated: true)
-        } else {
-            lblSuccessMessage.text = "Invalid login creds"
+    
+    @objc func handleLogin() {
+        // Fake API simulation
+        DispatchQueue.global().asyncAfter(deadline: .now() + 2.0) { [weak self] in
+            let success = (self?.usernameField.text == "abhi" && self?.passwordField.text == "123456")
+            DispatchQueue.main.async {
+                if success {
+                    self?.lblSuccessMessage.text = "Login successful"
+                    let dashboardVC = DashboardViewController()
+                    self?.navigationController?.pushViewController(dashboardVC, animated: true)
+                } else {
+                    self?.lblSuccessMessage.text = "Invalid login creds"
+                    let alert = UIAlertController(title: "Error", message: "Invalid credentials", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default))
+                    self?.present(alert, animated: true)
+                }
+            }
         }
-      }
+    }
 }
 

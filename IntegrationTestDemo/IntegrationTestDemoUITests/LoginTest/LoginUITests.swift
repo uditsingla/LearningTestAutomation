@@ -11,14 +11,14 @@ import XCTest
 final class LoginUITest: XCTestCase {
  
     func testLoginSuccess() {
-        LoginRobot()
+        _ = LoginRobot()
             .launch()
-            .login(username: "abhi", password: "123456")
+            .login(username: "abhis", password: "123456")
             .verifySuccessLogin()
     }
     
     func testLoginFailure() {
-        LoginRobot()
+        _ = LoginRobot()
             .launch()
             .login(username: "abhishek", password: "12345")
             .verifyLoginFail()
