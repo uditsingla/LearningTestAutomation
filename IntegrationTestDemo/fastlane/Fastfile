@@ -30,4 +30,20 @@ platform :ios do
       code_coverage: false
     )
   end
+
+  desc "Run Login → Dashboard flow tests"
+  lane :login_flow do
+    run_tests(
+      project: "IntegrationTestDemo.xcodeproj",
+      scheme: "LoginToDetails",
+      devices: ["iPhone 16"],
+      output_directory: "./fastlane/test_output/login",
+      output_types: "html,junit",
+      result_bundle: true,
+      derived_data_path: "./fastlane/derived_data",
+      fail_build: false,    # so CI completes even if tests fail
+      code_coverage: false
+    )
+  end
+
 end

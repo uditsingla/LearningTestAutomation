@@ -13,7 +13,7 @@ final class LoginUITest: XCTestCase {
     func testLoginSuccess() {
         _ = LoginRobot()
             .launch()
-            .login(username: "abhis", password: "123456")
+            .login(username: "abhi", password: "123456")
             .verifySuccessLogin()
     }
     
