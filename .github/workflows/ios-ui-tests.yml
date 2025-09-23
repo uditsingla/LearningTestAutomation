@@ -55,7 +55,7 @@ jobs:
       - name: Zip XCResult
         if: always()
         run: |
-          cd IntegrationTestDemo/fastlane/test_output/${{ matrix.scheme }}
+          cd fastlane/test_output/${{ matrix.scheme }}
           zip -r ../../ui-tests-${{ matrix.scheme }}.xcresult.zip *.xcresult || echo "No xcresult found"
 
 
@@ -64,4 +64,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ui-test-report-${{ matrix.scheme }}
-          path: IntegrationTestDemo/fastlane/ui-tests-${{ matrix.scheme }}.xcresult.zip
+          path: ui-tests-${{ matrix.scheme }}.xcresult.zip
