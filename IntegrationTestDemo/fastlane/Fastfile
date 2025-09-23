@@ -1,16 +1,20 @@
-lane :ui_tests do |options|
-  scheme_name = options[:scheme] || "IntegrationTestDemo"
+platform :ios do
+  desc "Run UI Tests"
+  lane :ui_tests do |options|
+    scheme_name = options[:scheme] || "IntegrationTestDemo"
 
-  run_tests(
-    project: "IntegrationTestDemo.xcodeproj",
-    scheme: scheme_name,
-    devices: ["iPhone 16"],
-    clean: true,
-    output_directory: "./fastlane/test_output/#{scheme_name}",
-    output_types: "html,junit",
-    result_bundle: true,
-    derived_data_path: "./fastlane/derived_data/#{scheme_name}",
-    fail_build: false,
-    code_coverage: false
-  )
+    run_tests(
+      project: "IntegrationTestDemo.xcodeproj",
+      scheme: scheme_name,
+      devices: ["iPhone 16"],
+      clean: true,
+      output_directory: "./fastlane/test_output/#{scheme_name}",
+      output_types: "html,junit",
+      result_bundle: true,
+      result_bundle_path: "./fastlane/test_output/#{scheme_name}/#{scheme_name}.xcresult",
+      derived_data_path: "./fastlane/derived_data/#{scheme_name}",
+      fail_build: false,    # CI completes even if tests fail
+      code_coverage: false
+    )
+  end
 end

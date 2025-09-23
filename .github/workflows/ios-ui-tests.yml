@@ -1,6 +1,7 @@
 name: iOS UI Tests
 
 on:
+  workflow_dispatch:        # 👈 allows manual re-run without pushing code
   push:
     branches: [ main ]
   pull_request:
@@ -11,7 +12,7 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        scheme: [IntegrationTestDemo, LoginToDetails]  # Add all your schemes here
+        scheme: [LoginToDetails, IntegrationTestDemo] # 👈 add more schemes here
 
     defaults:
       run:
@@ -37,36 +38,25 @@ jobs:
 
       - name: Prepare Simulator
         run: |
-          SIM="iPhone 16"
-          echo "Shutting down any running simulator..."
-          xcrun simctl shutdown "$SIM" || true
-          echo "Erasing simulator to ensure a clean state..."
-          xcrun simctl erase "$SIM"
-          echo "Booting simulator..."
-          xcrun simctl boot "$SIM"
-          echo "Waiting for simulator to be fully ready..."
-          timeout=60
-          while ! xcrun simctl bootstatus "$SIM" -b; do
-            sleep 5
-            timeout=$((timeout-5))
-            if [ $timeout -le 0 ]; then
-              echo "Simulator boot timed out"
-              exit 1
-            fi
-          done
+          xcrun simctl shutdown "iPhone 16" || true
+          xcrun simctl erase "iPhone 16"
+          xcrun simctl boot "iPhone 16"
+          xcrun simctl bootstatus "iPhone 16" -b -t 60 || echo "Boot timed out"
           xcrun simctl list devices
 
       - name: Run UI Tests with Fastlane
-        run: bundle exec fastlane ios ui_tests scheme:"${{ matrix.scheme }}"
+        run: bundle exec fastlane ui_tests scheme:"${{ matrix.scheme }}"
 
-      - name: Debug test output
-        run: |
-          echo "Listing test output folder for scheme: ${{ matrix.scheme }}"
-          ls -R fastlane/test_output/${{ matrix.scheme }} || echo "No output generated"
+      - name: List Test Output
+        run: ls -R fastlane/test_output || echo "No test output found"
 
       - name: Upload Test Results
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: ui-test-results-${{ matrix.scheme }}
-          path: fastlane/test_output/${{ matrix.scheme }}
+          name: ui-test-report-${{ matrix.scheme }}
+          path: |
+            fastlane/test_output/${{ matrix.scheme }}/report.html
+            fastlane/test_output/${{ matrix.scheme }}/report.junit
+            fastlane/test_output/${{ matrix.scheme }}/${{ matrix.scheme }}.xcresult
+          if-no-files-found: warn
