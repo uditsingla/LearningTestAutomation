@@ -8,10 +8,10 @@ platform :ios do
       scheme: scheme_name,
       devices: ["iPhone 16"],
       clean: true,
-      output_directory: "./fastlane/test_output/#{scheme_name}",  # 👈 reports folder per scheme
+      output_directory: "./fastlane/test_output/#{scheme_name}",
       output_types: "html,junit",
       result_bundle: true,
-      result_bundle_path: "./fastlane/test_output/#{scheme_name}/#{scheme_name}.xcresult", # 👈 xcresult named by scheme
+      result_bundle_path: "./fastlane/test_output/#{scheme_name}/#{scheme_name}.xcresult",
       derived_data_path: "./fastlane/derived_data/#{scheme_name}",
       fail_build: false,
       code_coverage: false
