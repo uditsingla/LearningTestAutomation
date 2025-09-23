@@ -20,7 +20,7 @@ platform :ios do
 
     run_tests(
       project: "IntegrationTestDemo.xcodeproj",
-      scheme: "scheme_name",                    # Replace with your scheme name
+      scheme: scheme_name,                    # Replace with your scheme name
       devices: ["iPhone 16"],
       clean: true,
       output_directory: "./fastlane/test_output/#{scheme_name}",

@@ -64,4 +64,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ui-test-report-${{ matrix.scheme }}
-          path: ui-tests-${{ matrix.scheme }}.xcresult.zip
+          path: fastlane/ui-tests-${{ matrix.scheme }}.xcresult.zip
