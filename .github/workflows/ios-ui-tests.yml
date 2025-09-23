@@ -55,8 +55,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ui-test-report-${{ matrix.scheme }}
-          path: |
-            fastlane/test_output/${{ matrix.scheme }}/report.html
-            fastlane/test_output/${{ matrix.scheme }}/report.junit
-            fastlane/test_output/${{ matrix.scheme }}/${{ matrix.scheme }}.xcresult
+          path: fastlane/test_output/${{ matrix.scheme }}/**
           if-no-files-found: warn
