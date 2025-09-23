@@ -1,18 +1,36 @@
+# fastlane/Fastfile
+
 platform :ios do
-  desc "Run UI Tests (scheme configurable)"
+  require 'fileutils'
+
+  desc "Run UI Tests for any scheme"
   lane :ui_tests do |options|
+    # Default scheme
     scheme_name = options[:scheme] || "IntegrationTestDemo"
+
+    # Ensure output directories exist
+    output_dir = "#{Dir.pwd}/fastlane/test_output/#{scheme_name}"
+    derived_dir = "#{Dir.pwd}/fastlane/derived_data/#{scheme_name}"
+    FileUtils.mkdir_p(output_dir)
+    FileUtils.mkdir_p(derived_dir)
+
+    xcresult_path = "#{output_dir}/#{scheme_name}.xcresult"
+
+    puts "Running tests for scheme: #{scheme_name}"
+    puts "Output directory: #{output_dir}"
+    puts "Derived data directory: #{derived_dir}"
+    puts "Result bundle path: #{xcresult_path}"
 
     run_tests(
       project: "IntegrationTestDemo.xcodeproj",
       scheme: scheme_name,
       devices: ["iPhone 16"],
       clean: true,
-      output_directory: "./fastlane/test_output/#{scheme_name}",
-      output_types: "html,junit",
+      output_directory: output_dir,
+      derived_data_path: derived_dir,
       result_bundle: true,
-      result_bundle_path: "./fastlane/test_output/#{scheme_name}/#{scheme_name}.xcresult",
-      derived_data_path: "./fastlane/derived_data/#{scheme_name}",
+      result_bundle_path: xcresult_path,
+      output_types: "html,junit",
       fail_build: false,
       code_coverage: false
     )
