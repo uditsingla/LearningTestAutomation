@@ -21,7 +21,7 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 [bundle exec] fastlane ios ui_tests
 ```
 
-Run UI Tests
+Run UI Tests (scheme configurable)
 
 ----
 

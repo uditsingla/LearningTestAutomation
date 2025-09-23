@@ -20,6 +20,7 @@ final class EndToEndFlowTests: XCTestCase {
     }
     
     func testEndToEndLoginToDetails() {
+        
         let loginRobot = LoginRobot()
         let dashboardRobot = DashboardRobot(app: app)
         let detailRobot = DetailRobot(app: app)
@@ -27,10 +28,16 @@ final class EndToEndFlowTests: XCTestCase {
         // Step 1: Login
         _ = loginRobot.login(username: "abhi", password: "123456")
         
-        XCTAssertTrue(dashboardRobot.welcomeLabel.waitForExistence(timeout: 5), "Dashboard should appear")
+       // XCTAssertTrue(dashboardRobot.welcomeLabel.waitForExistence(timeout: 5), "Welcome to Dashboard!")
+        
+        WaitHelper.waitForElementToAppear(dashboardRobot.welcomeLabel)
+        dashboardRobot.assertDashboardVisible()
 
         // Step 2: Navigate to Details
         dashboardRobot.goToDetails()
-        XCTAssertTrue(detailRobot.isVisible(), "Detail screen should appear")
+        WaitHelper.waitForElementToAppear(detailRobot.infoLabel)
+
+        XCTAssertTrue(detailRobot.isVisible())
+         
     }
 }

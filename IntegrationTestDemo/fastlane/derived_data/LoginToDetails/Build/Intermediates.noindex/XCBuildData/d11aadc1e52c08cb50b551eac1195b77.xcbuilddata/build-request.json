@@ -1,0 +1,76 @@
+{
+  "buildCommand" : {
+    "command" : "build",
+    "skipDependencies" : false,
+    "style" : "buildAndRun"
+  },
+  "configuredTargets" : [
+    {
+      "guid" : "d8c8274cfe0f5f5369fc68c5da74e4f7845d1dc5ead70317163b3ef47c9fa3ab"
+    },
+    {
+      "guid" : "d8c8274cfe0f5f5369fc68c5da74e4f7bcae9de48e90c5010a0eaeef020c4e49"
+    },
+    {
+      "guid" : "d8c8274cfe0f5f5369fc68c5da74e4f7c858e7cb0acf9818520f0408b64a9ff6"
+    }
+  ],
+  "containerPath" : "/Users/abhishek.singla/Desktop/Abhi/Projects/LearningTestAutomation/IntegrationTestDemo/IntegrationTestDemo.xcodeproj",
+  "continueBuildingAfterErrors" : false,
+  "dependencyScope" : "workspace",
+  "enableIndexBuildArena" : false,
+  "hideShellScriptEnvironment" : false,
+  "parameters" : {
+    "action" : "build",
+    "activeArchitecture" : "arm64",
+    "activeRunDestination" : {
+      "disableOnlyActiveArch" : false,
+      "platform" : "iphonesimulator",
+      "sdk" : "iphonesimulator18.4",
+      "sdkVariant" : "iphonesimulator",
+      "supportedArchitectures" : [
+        "arm64",
+        "x86_64"
+      ],
+      "targetArchitecture" : "arm64"
+    },
+    "arenaInfo" : {
+      "buildIntermediatesPath" : "/Users/abhishek.singla/Desktop/Abhi/Projects/LearningTestAutomation/IntegrationTestDemo/fastlane/derived_data/LoginToDetails/Build/Intermediates.noindex",
+      "buildProductsPath" : "/Users/abhishek.singla/Desktop/Abhi/Projects/LearningTestAutomation/IntegrationTestDemo/fastlane/derived_data/LoginToDetails/Build/Products",
+      "derivedDataPath" : "/Users/abhishek.singla/Desktop/Abhi/Projects/LearningTestAutomation/IntegrationTestDemo/fastlane/derived_data/LoginToDetails",
+      "indexDataStoreFolderPath" : "/Users/abhishek.singla/Desktop/Abhi/Projects/LearningTestAutomation/IntegrationTestDemo/fastlane/derived_data/LoginToDetails/Index.noindex/DataStore",
+      "indexEnableDataStore" : true,
+      "indexPCHPath" : "/Users/abhishek.singla/Desktop/Abhi/Projects/LearningTestAutomation/IntegrationTestDemo/fastlane/derived_data/LoginToDetails/Index.noindex/PrecompiledHeaders",
+      "pchPath" : "/Users/abhishek.singla/Desktop/Abhi/Projects/LearningTestAutomation/IntegrationTestDemo/fastlane/derived_data/LoginToDetails/Build/Intermediates.noindex/PrecompiledHeaders"
+    },
+    "configurationName" : "Debug",
+    "overrides" : {
+      "commandLine" : {
+        "table" : {
+
+        }
+      },
+      "synthesized" : {
+        "table" : {
+          "ASSETCATALOG_FILTER_FOR_DEVICE_MODEL" : "iPhone17,3",
+          "ASSETCATALOG_FILTER_FOR_DEVICE_OS_VERSION" : "18.4",
+          "ASSETCATALOG_FILTER_FOR_THINNING_DEVICE_CONFIGURATION" : "iPhone17,3",
+          "BUILD_ACTIVE_RESOURCES_ONLY" : "YES",
+          "ENABLE_PREVIEWS" : "NO",
+          "ENABLE_XOJIT_PREVIEWS" : "YES",
+          "ONLY_ACTIVE_ARCH" : "YES",
+          "TARGET_DEVICE_IDENTIFIER" : "2C2D26E7-2874-4CEB-89F8-541D3FB31333",
+          "TARGET_DEVICE_MODEL" : "iPhone17,3",
+          "TARGET_DEVICE_OS_VERSION" : "18.4",
+          "TARGET_DEVICE_PLATFORM_NAME" : "iphonesimulator"
+        }
+      }
+    }
+  },
+  "schemeCommand" : "test",
+  "showNonLoggedProgress" : true,
+  "useDryRun" : false,
+  "useImplicitDependencies" : true,
+  "useLegacyBuildLocations" : false,
+  "useParallelTargets" : true
+}
