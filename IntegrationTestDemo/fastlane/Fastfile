@@ -1,4 +1,3 @@
-platform :ios do
   desc "Run UI Tests"
   lane :ui_tests do |options|
     scheme_name = options[:scheme] || "IntegrationTestDemo"
@@ -17,4 +16,4 @@ platform :ios do
       code_coverage: false
     )
   end
-end
+
