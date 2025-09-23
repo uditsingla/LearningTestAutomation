@@ -1,50 +1,20 @@
-# This file contains the fastlane.tools configuration
-# You can find the documentation at https://docs.fastlane.tools
-#
-# For a list of all available actions, check out
-#
-#     https://docs.fastlane.tools/actions
-#
-# For a list of all available plugins, check out
-#
-#     https://docs.fastlane.tools/plugins/available-plugins
-#
-
-# Uncomment the line if you want fastlane to automatically update itself
-# update_fastlane
-
 platform :ios do
-  desc "Run UI Tests"
+  desc "Run UI Tests (scheme configurable)"
   lane :ui_tests do |options|
     scheme_name = options[:scheme] || "IntegrationTestDemo"
 
     run_tests(
       project: "IntegrationTestDemo.xcodeproj",
-      scheme: scheme_name,                    # Replace with your scheme name
+      scheme: scheme_name,
       devices: ["iPhone 16"],
       clean: true,
-      output_directory: "./fastlane/test_output/#{scheme_name}",
+      output_directory: "./fastlane/test_output/#{scheme_name}",  # 👈 reports folder per scheme
       output_types: "html,junit",
       result_bundle: true,
+      result_bundle_path: "./fastlane/test_output/#{scheme_name}/#{scheme_name}.xcresult", # 👈 xcresult named by scheme
       derived_data_path: "./fastlane/derived_data/#{scheme_name}",
-      fail_build: false,    # so CI completes even if tests fail
+      fail_build: false,
       code_coverage: false
     )
   end
-
-  desc "Run Login → Dashboard flow tests"
-  lane :login_flow do
-    run_tests(
-      project: "IntegrationTestDemo.xcodeproj",
-      scheme: "LoginToDetails",
-      devices: ["iPhone 16"],
-      output_directory: "./fastlane/test_output/LoginToDetails",
-      output_types: "html,junit",
-      result_bundle: true,
-      derived_data_path: "./fastlane/derived_data/LoginToDetails",
-      fail_build: false,    # so CI completes even if tests fail
-      code_coverage: false
-    )
-  end
-
 end
