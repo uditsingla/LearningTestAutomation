@@ -1,6 +1,0 @@
-Target dependency graph (3 targets)
-Target 'IntegrationTestDemoUITests' in project 'IntegrationTestDemo'
-➜ Explicit dependency on target 'IntegrationTestDemo' in project 'IntegrationTestDemo'
-Target 'IntegrationTestDemoTests' in project 'IntegrationTestDemo'
-➜ Explicit dependency on target 'IntegrationTestDemo' in project 'IntegrationTestDemo'
-Target 'IntegrationTestDemo' in project 'IntegrationTestDemo' (no dependencies)

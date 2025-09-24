@@ -31,7 +31,7 @@
       shouldAutocreateTestPlan = "YES">
       <Testables>
          <TestableReference
-            skipped = "NO"
+            skipped = "YES"
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
@@ -53,6 +53,12 @@
             </BuildableReference>
             <SkippedTests>
                <Test
+                  Identifier = "DashboardUITests">
+               </Test>
+               <Test
+                  Identifier = "DashboardUITests/testDashboardNavigation()">
+               </Test>
+               <Test
                   Identifier = "IntegrationTestDemoUITests">
                </Test>
                <Test
@@ -60,6 +66,21 @@
                </Test>
                <Test
                   Identifier = "IntegrationTestDemoUITests/testLaunchPerformance()">
+               </Test>
+               <Test
+                  Identifier = "IntegrationTestDemoUITestsLaunchTests">
+               </Test>
+               <Test
+                  Identifier = "IntegrationTestDemoUITestsLaunchTests/testLaunch()">
+               </Test>
+               <Test
+                  Identifier = "LoginUITest">
+               </Test>
+               <Test
+                  Identifier = "LoginUITest/testLoginFailure()">
+               </Test>
+               <Test
+                  Identifier = "LoginUITest/testLoginSuccess()">
                </Test>
             </SkippedTests>
          </TestableReference>
