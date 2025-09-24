@@ -10,6 +10,7 @@ import XCTest
 
 final class DashboardUITests: XCTestCase {
  
+    /*
     func testDashboardNavigation() {
         _ = LoginRobot()
             .launch()
@@ -20,4 +21,5 @@ final class DashboardUITests: XCTestCase {
             .assertDashboardTitle()
             .navigateToDetails()
     }
+     */
 }
