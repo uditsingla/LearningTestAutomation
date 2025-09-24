@@ -6,12 +6,13 @@
 //
 import XCTest
 
-struct DetailRobot {
-    let app: XCUIApplication
+class DetailRobot {
+    
+    private let app: XCUIApplication = XCUIApplication()
+    private lazy var detailPage = DetailPage(app: app)
 
-    var infoLabel: XCUIElement { app.staticTexts["infoLabel"] }
-
-    func isVisible() -> Bool {
-        infoLabel.waitForExistence(timeout: 5)
+    func assertDetailTitle() -> DetailRobot{
+        _ = detailPage.assertDetailTitle()
+        return self
     }
 }

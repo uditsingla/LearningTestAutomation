@@ -7,7 +7,26 @@
 
 import XCTest
  
-struct DashboardPageTests {
+struct DashboardPage {
+    
     let app : XCUIApplication
-
+    
+    var lblDashboard : XCUIElement {
+        app.staticTexts["dashboardlabel"]
+    }
+    
+    var flowButton : XCUIElement {
+        app.buttons["flowButton"]
+    }
+    
+    func assertDashboardTitle() -> DashboardPage {
+        WaitHelper.waitForElementToAppear(lblDashboard)
+        XCTAssertEqual(lblDashboard.label, "Welcome to Dashboard!")
+        return self
+    }
+    
+    func clkGoToDetails() -> DashboardPage {
+        flowButton.tap()
+        return self
+    }
 }

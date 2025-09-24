@@ -1,16 +1,16 @@
 //
-//  DashboardUITests.swift
+//  DetailUITests.swift
 //  IntegrationTestDemo
 //
-//  Created by Abhishek  Singla on 18/09/25.
+//  Created by Abhishek  Singla on 24/09/25.
 //
 
 import XCTest
 @testable import IntegrationTestDemo
 
-final class DashboardUITests: XCTestCase {
+final class DetailUITests: XCTestCase {
  
-    func testDashboardNavigation() {
+    func testDetailScreenNavigation() {
         _ = LoginRobot()
             .launch()
             .login(username: "abhi", password: "123456")
@@ -19,5 +19,8 @@ final class DashboardUITests: XCTestCase {
         _ = DashboardRobot()
             .assertDashboardTitle()
             .navigateToDetails()
+        
+        _ = DetailRobot()
+            .assertDetailTitle()
     }
 }

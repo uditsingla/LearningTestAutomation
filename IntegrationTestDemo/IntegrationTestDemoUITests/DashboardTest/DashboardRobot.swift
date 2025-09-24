@@ -9,20 +9,17 @@
 import XCTest
 
 class DashboardRobot {
-    private let app: XCUIApplication
     
-    var flowButton: XCUIElement { app.buttons["flowButton"] }
-    var welcomeLabel: XCUIElement { app.staticTexts["dashboardlabel"] }
+    private let app: XCUIApplication = XCUIApplication()
+    private lazy var dashboardPage = DashboardPage(app: app)
 
-    init(app: XCUIApplication) {
-        self.app = app
+    func assertDashboardTitle() -> DashboardRobot{
+        _ = dashboardPage.assertDashboardTitle()
+        return self
     }
     
-    func assertDashboardVisible() {
-        XCTAssertTrue(app.staticTexts["Welcome to Dashboard!"].exists)
-    }
-    
-    func goToDetails() {
-        flowButton.tap()
+    func navigateToDetails() -> DashboardRobot {
+        _ = dashboardPage.clkGoToDetails()
+        return self
     }
 }
