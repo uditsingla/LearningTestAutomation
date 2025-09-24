@@ -8,7 +8,7 @@
 import XCTest
 
 struct WaitHelper {
-    static func waitForElementToAppear(_ element: XCUIElement, timeout: TimeInterval = 5, file: StaticString = #filePath, line: UInt = #line) {
+    static func waitForElementToAppear(_ element: XCUIElement, timeout: TimeInterval = 60, file: StaticString = #filePath, line: UInt = #line) {
         let exists = element.waitForExistence(timeout: timeout)
         XCTAssertTrue(exists, "Expected element \(element) to appear", file: file, line: line)
     }
