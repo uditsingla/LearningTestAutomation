@@ -1,0 +1,59 @@
+name: iOS UI Tests
+
+on:
+  workflow_dispatch:       
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  ui-tests:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        scheme: [IntegrationTestDemo]
+
+    defaults:
+      run:
+        working-directory: IntegrationTestDemo
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.2
+          bundler-cache: true
+
+      - name: Install dependencies
+        run: |
+          gem install bundler -v 2.6.9
+          bundle install
+
+      - name: List available simulators
+        run: xcrun simctl list devices
+
+      - name: Prepare Simulator
+        run: |
+          xcrun simctl shutdown "iPhone 16" || true
+          xcrun simctl erase "iPhone 16"
+          xcrun simctl boot "iPhone 16"
+          xcrun simctl bootstatus "iPhone 16" -b -t 60 || echo "Boot timed out"
+          xcrun simctl list devices
+
+      - name: Run UI Tests with Fastlane
+        run: bundle exec fastlane ui_tests scheme:"${{ matrix.scheme }}"
+
+      - name: List Test Output
+        run: ls -R fastlane/test_output || echo "No test output found"
+
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-test-report-${{ matrix.scheme }}
+          path: IntegrationTestDemo/fastlane/test_output/${{ matrix.scheme }}/**
+          if-no-files-found: warn

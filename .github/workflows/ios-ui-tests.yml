@@ -1,7 +1,6 @@
 name: iOS UI Tests
 
 on:
-  workflow_dispatch:       
   push:
     branches: [ main ]
   pull_request:
@@ -10,13 +9,10 @@ on:
 jobs:
   ui-tests:
     runs-on: macos-latest
-    strategy:
-      matrix:
-        scheme: [IntegrationTestDemo]
 
     defaults:
       run:
-        working-directory: IntegrationTestDemo
+        working-directory: IntegrationTestDemo  # 👈 Run inside your project folder
 
     steps:
       - name: Checkout repository
@@ -25,7 +21,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.2.2
+          ruby-version: 3.2.2       # match your local Ruby version
           bundler-cache: true
 
       - name: Install dependencies
@@ -38,22 +34,23 @@ jobs:
 
       - name: Prepare Simulator
         run: |
-          xcrun simctl shutdown "iPhone 16" || true
-          xcrun simctl erase "iPhone 16"
-          xcrun simctl boot "iPhone 16"
-          xcrun simctl bootstatus "iPhone 16" -b -t 60 || echo "Boot timed out"
-          xcrun simctl list devices
+         echo "Shutting down simulator if it's already running"
+         xcrun simctl shutdown "iPhone 16" || true
+         echo "Erasing simulator to ensure clean state"
+         xcrun simctl erase "iPhone 16"
+         echo "Booting simulator"
+         xcrun simctl boot "iPhone 16"
+         xcrun simctl bootstatus "iPhone 16" -b
+         xcrun simctl list devices
 
       - name: Run UI Tests with Fastlane
-        run: bundle exec fastlane ui_tests scheme:"${{ matrix.scheme }}"
-
+        run: bundle exec fastlane ios ui_tests
+        
       - name: List Test Output
-        run: ls -R fastlane/test_output || echo "No test output found"
+        run: ls -la fastlane/test_output
 
-      - name: Upload Test Results
-        if: always()
+      - name: Upload Test Report
         uses: actions/upload-artifact@v4
         with:
-          name: ui-test-report-${{ matrix.scheme }}
-          path: IntegrationTestDemo/fastlane/test_output/${{ matrix.scheme }}/**
-          if-no-files-found: warn
+          name: ui-test-report
+          path: IntegrationTestDemo/fastlane/test_output
