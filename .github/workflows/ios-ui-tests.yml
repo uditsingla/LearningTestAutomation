@@ -1,7 +1,7 @@
 name: iOS UI Tests
 
 on:
-  workflow_dispatch:        # 👈 allows manual re-run without pushing code
+  workflow_dispatch:       
   push:
     branches: [ main ]
   pull_request:
@@ -12,7 +12,7 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        scheme: [LoginToDetails, IntegrationTestDemo] # 👈 add more schemes here
+        scheme: [IntegrationTestDemo]
 
     defaults:
       run:

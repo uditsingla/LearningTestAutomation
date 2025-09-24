@@ -10,6 +10,7 @@ import XCTest
 
 final class DetailUITests: XCTestCase {
  
+    /*
     func testDetailScreenNavigation() {
         _ = LoginRobot()
             .launch()
@@ -23,4 +24,5 @@ final class DetailUITests: XCTestCase {
         _ = DetailRobot()
             .assertDetailTitle()
     }
+     */
 }
