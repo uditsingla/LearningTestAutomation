@@ -13,10 +13,8 @@
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 
-platform :ios do
   desc "Run UI Tests"
   lane :ui_tests do
-#scan
     run_tests(
       project: "IntegrationTestDemo.xcodeproj",
       scheme: "IntegrationTestDemo",                    # Replace with your scheme name

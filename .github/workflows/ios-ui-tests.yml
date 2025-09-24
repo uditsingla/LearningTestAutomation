@@ -44,7 +44,7 @@ jobs:
          xcrun simctl list devices
 
       - name: Run UI Tests with Fastlane
-        run: bundle exec fastlane ios ui_tests
+        run: bundle exec fastlane ui_tests
         
       - name: List Test Output
         run: ls -la fastlane/test_output
