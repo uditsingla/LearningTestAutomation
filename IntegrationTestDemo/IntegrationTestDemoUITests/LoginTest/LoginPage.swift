@@ -47,6 +47,7 @@ struct LoginPage {
     }
     
     func assertLoginSuccess() -> LoginPage {
+        Thread.sleep(forTimeInterval: 2)
         WaitHelper.waitForElementToAppear(lblDashboard)
         XCTAssertEqual(lblDashboard.label, "Welcome to Dashboard!")
         return self

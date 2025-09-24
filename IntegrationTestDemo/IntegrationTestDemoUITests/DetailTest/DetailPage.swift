@@ -16,6 +16,7 @@ struct DetailPage {
     }
     
     func assertDetailTitle() -> DetailPage {
+        Thread.sleep(forTimeInterval: 2)
         WaitHelper.waitForElementToAppear(lblDetail)
         XCTAssertEqual(lblDetail.label, "Welcome to Details!")
         return self
