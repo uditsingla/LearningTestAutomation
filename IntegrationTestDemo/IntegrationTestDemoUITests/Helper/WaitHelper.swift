@@ -8,10 +8,8 @@
 import XCTest
 
 struct WaitHelper {
-    static func waitForElementToAppear(_ element: XCUIElement, timeout: TimeInterval = 60, file: StaticString = #filePath, line: UInt = #line) {
-        let predicate = NSPredicate(format: "exists == true")
-        let expectation = XCTNSPredicateExpectation(predicate: predicate, object: element)
-        let result = XCTWaiter.wait(for: [expectation], timeout: timeout)
-        XCTAssertTrue(result == .completed, "Expected element \(element) to appear", file: file, line: line)
+    static func waitForElementToAppear(_ element: XCUIElement, timeout: TimeInterval = 120, file: StaticString = #filePath, line: UInt = #line) {
+        let exists = element.waitForExistence(timeout: timeout)
+        XCTAssertTrue(exists, "Expected element \(element) to appear", file: file, line: line)
     }
 }

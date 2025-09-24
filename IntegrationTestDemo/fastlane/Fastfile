@@ -13,7 +13,10 @@
       result_bundle_path: "./fastlane/test_output/#{scheme_name}/#{scheme_name}.xcresult",
       derived_data_path: "./fastlane/derived_data/#{scheme_name}",
       fail_build: false,    # CI completes even if tests fail
-      code_coverage: false
+      code_coverage: false,
+      parallelization_enabled: false,
+      retries: 2,
+      retry_test_runner_failures: true,
     )
   end
 

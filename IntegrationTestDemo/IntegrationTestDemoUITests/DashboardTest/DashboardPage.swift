@@ -20,7 +20,6 @@ struct DashboardPage {
     }
     
     func assertDashboardTitle() -> DashboardPage {
-        Thread.sleep(forTimeInterval: 2)
         WaitHelper.waitForElementToAppear(lblDashboard)
         XCTAssertEqual(lblDashboard.label, "Welcome to Dashboard!")
         return self
