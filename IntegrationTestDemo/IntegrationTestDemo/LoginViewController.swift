@@ -57,14 +57,10 @@ class LoginViewController: UIViewController {
             DispatchQueue.main.async {
                 let success = (self?.usernameField.text == "abhi" && self?.passwordField.text == "123456")
                 if success {
-                    //self?.lblSuccessMessage.text = "Login successful"
                     let dashboardVC = DashboardViewController()
                     self?.navigationController?.pushViewController(dashboardVC, animated: true)
                 } else {
                     self?.lblSuccessMessage.text = "Invalid login creds"
-//                    let alert = UIAlertController(title: "Error", message: "Invalid credentials", preferredStyle: .alert)
-//                    alert.addAction(UIAlertAction(title: "OK", style: .default))
-//                    self?.present(alert, animated: true)
                 }
             }
         }
