@@ -14,10 +14,10 @@ class DashboardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        label.text = "Welcome to Dashboard!"
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         label.accessibilityIdentifier = "dashboardlabel"
+        label.text = "Welcome to Dashboard!"
         view.addSubview(label)
         view.backgroundColor = .orange
         

@@ -54,10 +54,10 @@ class LoginViewController: UIViewController {
     @objc func handleLogin() {
         // Fake API simulation
         DispatchQueue.global().asyncAfter(deadline: .now() + 2.0) { [weak self] in
-            let success = (self?.usernameField.text == "abhi" && self?.passwordField.text == "123456")
             DispatchQueue.main.async {
+                let success = (self?.usernameField.text == "abhi" && self?.passwordField.text == "123456")
                 if success {
-                    self?.lblSuccessMessage.text = "Login successful"
+                    //self?.lblSuccessMessage.text = "Login successful"
                     let dashboardVC = DashboardViewController()
                     self?.navigationController?.pushViewController(dashboardVC, animated: true)
                 } else {

@@ -1,30 +1,35 @@
-# This file contains the fastlane.tools configuration
-# You can find the documentation at https://docs.fastlane.tools
-#
-# For a list of all available actions, check out
-#
-#     https://docs.fastlane.tools/actions
-#
-# For a list of all available plugins, check out
-#
-#     https://docs.fastlane.tools/plugins/available-plugins
-#
-
-# Uncomment the line if you want fastlane to automatically update itself
-# update_fastlane
-
-  desc "Run UI Tests"
-  lane :ui_tests do
-    destination = "'platform=iOS Simulator,name=iPhone 16,OS=18.4'"
-    run_tests(
-      project: "IntegrationTestDemo.xcodeproj",
-      scheme: "IntegrationTestDemo",                    # Replace with your scheme name
-      devices: ["iPhone 16"],
-      clean: true,
-      output_directory: "./fastlane/test_output",
-      output_types: "html,junit",
-      result_bundle: true,
-      derived_data_path: "./fastlane/derived_data",
-      fail_build: false,    # so CI completes even if tests fail
-    )
+desc "Run UI Tests"
+lane :ui_tests do
+  udid = ENV['SIMULATOR_UDID']
+  if udid.nil? || udid.empty?
+    UI.user_error!("No SIMULATOR_UDID found! Make sure CI sets it via simctl create.")
   end
+
+  destination = "'id=#{udid}'"
+
+  # Build once for testing
+  sh "xcodebuild build-for-testing \
+      -project IntegrationTestDemo.xcodeproj \
+      -scheme IntegrationTestDemo \
+      -destination #{destination} \
+      -derivedDataPath ./fastlane/derived_data \
+      -quiet"
+
+  # Run tests without rebuilding
+  sh "xcodebuild test-without-building \
+      -project IntegrationTestDemo.xcodeproj \
+      -scheme IntegrationTestDemo \
+      -destination #{destination} \
+      -maximum-concurrent-test-simulator-destinations 1 \
+      -resultBundlePath ./fastlane/test_output/IntegrationTestDemo.xcresult \
+      -quiet"
+
+  # Optional: Generate HTML/JUnit reports if xchtmlreport is available
+  begin
+    xcresulttool = "./fastlane/test_output/IntegrationTestDemo.xcresult"
+    sh "xchtmlreport -r #{xcresulttool} -o ./fastlane/test_output"
+  rescue
+    UI.message("xchtmlreport not installed, skipping HTML report generation")
+  end
+end
+

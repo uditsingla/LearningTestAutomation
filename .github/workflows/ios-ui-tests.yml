@@ -21,7 +21,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.2.2       # match your local Ruby version
+          ruby-version: 3.2.2
           bundler-cache: true
 
       - name: Install dependencies
@@ -29,23 +29,31 @@ jobs:
           gem install bundler -v 2.6.9
           bundle install
 
-      - name: List available simulators
-        run: xcrun simctl list devices
+      - name: List available runtimes
+        run: xcrun simctl list runtimes
 
-      - name: Prepare Simulator
+      - name: Create fresh iPhone 16 simulator (iOS 18.4)
         run: |
-         echo "Shutting down simulator if it's already running"
-         xcrun simctl shutdown "iPhone 16" || true
-         echo "Erasing simulator to ensure clean state"
-         xcrun simctl erase "iPhone 16"
-         echo "Booting simulator"
-         xcrun simctl boot "iPhone 16"
-         xcrun simctl bootstatus "iPhone 16" -b
-         xcrun simctl list devices
+          UDID=$(xcrun simctl create "CI-iPhone16" "iPhone 16" "iOS 18.4")
+          echo "SIMULATOR_UDID=$UDID" >> $GITHUB_ENV
+          echo "Created simulator with UDID: $UDID"
+
+      - name: Boot simulator
+        run: |
+          xcrun simctl boot $SIMULATOR_UDID
+          xcrun simctl bootstatus $SIMULATOR_UDID -b
+          echo "Waiting extra time for SpringBoard..."
+          sleep 20
+          xcrun simctl list devices
+
+      - name: Clean Derived Data
+        run: rm -rf fastlane/derived_data
 
       - name: Run UI Tests with Fastlane
         run: bundle exec fastlane ui_tests
-        
+        env:
+          SIMULATOR_UDID: ${{ env.SIMULATOR_UDID }}
+
       - name: List Test Output
         run: ls -la fastlane/test_output
 
