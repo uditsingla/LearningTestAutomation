@@ -25,6 +25,15 @@ struct LoginPage {
         app.buttons["loginButton"]
     }
     
+//    var lButton: XCUIElement {
+//        app.buttons.matching(NSPredicate(format: "label CONTAINS 'Login'")).firstMatch
+//    }
+    
+    //    var lButton: XCUIElement {
+    //        app.buttons.matching(NSPredicate(format: "label CONTAINS 'Login'")).firstMatch
+    //    }
+    
+    
     var lblDashboard : XCUIElement {
         app.staticTexts["dashboardlabel"]
     }
