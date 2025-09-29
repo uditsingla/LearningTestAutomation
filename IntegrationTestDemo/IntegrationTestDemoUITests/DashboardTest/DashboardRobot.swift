@@ -10,10 +10,14 @@ import XCTest
 
 class DashboardRobot {
     
-    private let app: XCUIApplication = XCUIApplication()
+    private let app: XCUIApplication
     private lazy var dashboardPage = DashboardPage(app: app)
 
-    func assertDashboardTitle() -> DashboardRobot{
+    init(app: XCUIApplication) {
+        self.app = app
+    }
+
+    func assertDashboardTitle() -> DashboardRobot {
         _ = dashboardPage.assertDashboardTitle()
         return self
     }

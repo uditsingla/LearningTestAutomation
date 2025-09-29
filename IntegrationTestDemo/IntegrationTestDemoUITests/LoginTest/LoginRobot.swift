@@ -10,16 +10,14 @@ import XCTest
 
 class LoginRobot {
     
-    private let app: XCUIApplication = XCUIApplication()
+    private let app: XCUIApplication
     private lazy var loginPage = LoginPage(app: app)
 
-    func launch() -> LoginRobot{
-        app.launch()
-        return self
+    init(app: XCUIApplication) {
+        self.app = app
     }
-    
-    func login(username: String, password: String) -> LoginRobot{
-        app.launch()
+
+    func login(username: String, password: String) -> LoginRobot {
         _ = loginPage.enterUsername(username: username)
         _ = loginPage.enterPassword(password: password)
         _ = loginPage.clkLoginButton()

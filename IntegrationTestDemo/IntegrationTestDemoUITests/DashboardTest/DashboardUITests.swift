@@ -8,18 +8,15 @@
 import XCTest
 @testable import IntegrationTestDemo
 
-final class DashboardUITests: XCTestCase {
- 
-    /*
+final class DashboardUITests: BaseTest {
+
     func testDashboardNavigation() {
-        _ = LoginRobot()
-            .launch()
+        _ = LoginRobot(app: app)
             .login(username: "abhi", password: "123456")
             .verifySuccessLogin()
-        
-        _ = DashboardRobot()
+
+        _ = DashboardRobot(app: app)
             .assertDashboardTitle()
             .navigateToDetails()
     }
-     */
 }

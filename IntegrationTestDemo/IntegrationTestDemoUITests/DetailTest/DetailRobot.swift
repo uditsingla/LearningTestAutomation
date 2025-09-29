@@ -8,10 +8,14 @@ import XCTest
 
 class DetailRobot {
     
-    private let app: XCUIApplication = XCUIApplication()
+    private let app: XCUIApplication
     private lazy var detailPage = DetailPage(app: app)
 
-    func assertDetailTitle() -> DetailRobot{
+    init(app: XCUIApplication) {
+        self.app = app
+    }
+
+    func assertDetailTitle() -> DetailRobot {
         _ = detailPage.assertDetailTitle()
         return self
     }

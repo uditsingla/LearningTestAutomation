@@ -8,18 +8,16 @@
 import XCTest
 @testable import IntegrationTestDemo
 
-final class LoginUITest: XCTestCase {
- 
+final class LoginUITest: BaseTest {
+
     func testLoginSuccess() {
-        _ = LoginRobot()
-            .launch()
+        _ = LoginRobot(app: app)
             .login(username: "abhi", password: "123456")
             .verifySuccessLogin()
     }
-    
+
     func testLoginFailure() {
-        _ = LoginRobot()
-            .launch()
+        _ = LoginRobot(app: app)
             .login(username: "abhishek", password: "12345")
             .verifyLoginFail()
     }
