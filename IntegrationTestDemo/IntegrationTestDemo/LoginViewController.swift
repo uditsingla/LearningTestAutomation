@@ -62,9 +62,9 @@ class LoginViewController: UIViewController {
                     self?.navigationController?.pushViewController(dashboardVC, animated: true)
                 } else {
                     self?.lblSuccessMessage.text = "Invalid login creds"
-                    let alert = UIAlertController(title: "Error", message: "Invalid credentials", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .default))
-                    self?.present(alert, animated: true)
+//                    let alert = UIAlertController(title: "Error", message: "Invalid credentials", preferredStyle: .alert)
+//                    alert.addAction(UIAlertAction(title: "OK", style: .default))
+//                    self?.present(alert, animated: true)
                 }
             }
         }
