@@ -15,6 +15,7 @@
 
   desc "Run UI Tests"
   lane :ui_tests do
+    destination = "'platform=iOS Simulator,name=iPhone 16,OS=18.4'"
     run_tests(
       project: "IntegrationTestDemo.xcodeproj",
       scheme: "IntegrationTestDemo",                    # Replace with your scheme name
